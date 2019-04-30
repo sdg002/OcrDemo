@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcrDemo", "OcrDemo\OcrDemo.csproj", "{B7464C63-AAD8-4E4B-A53C-21A6CF1EC32D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcrLib", "OcrLib\OcrLib.csproj", "{B4B0807B-7638-46FA-8BC5-51A62753B73F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7464C63-AAD8-4E4B-A53C-21A6CF1EC32D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7464C63-AAD8-4E4B-A53C-21A6CF1EC32D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7464C63-AAD8-4E4B-A53C-21A6CF1EC32D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7464C63-AAD8-4E4B-A53C-21A6CF1EC32D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B0807B-7638-46FA-8BC5-51A62753B73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B0807B-7638-46FA-8BC5-51A62753B73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B0807B-7638-46FA-8BC5-51A62753B73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B0807B-7638-46FA-8BC5-51A62753B73F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FACD592-EBB1-496C-A35F-EB92FAC7945D}
+	EndGlobalSection
+EndGlobal
