@@ -8,8 +8,17 @@
         Title="OCR Demo" Height="450" Width="800">
     <Border BorderBrush="LightGray" BorderThickness="2">
         <Grid>
-            <TabControl x:Name="ctlTabMain">
-            </TabControl>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TabControl x:Name="ctlTabMain" Grid.Row="0"/>
+            <StatusBar Grid.Row="1">
+                <StatusBarItem>
+                    <TextBlock Text="OCR Demo"></TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+
         </Grid>
     </Border>
 </Window>
