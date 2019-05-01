@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OcrDemo"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip"
+        xmlns:controls="clr-namespace:OcrDemo.controls"
         Title="OCR Demo" Height="450" Width="800">
     <Border BorderBrush="LightGray" BorderThickness="2">
         <Grid>
@@ -12,13 +13,20 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TabControl x:Name="ctlTabMain" Grid.Row="0"/>
+            <TabControl x:Name="ctlTabMain" Grid.Row="0">
+                <!--<TabItem Header="junk 1">
+                    <Button>dumy 1</Button>
+                </TabItem>
+                <TabItem Header="junk 2">
+                    <Button>dumy 2</Button>
+                </TabItem>-->
+            </TabControl>
             <StatusBar Grid.Row="1">
                 <StatusBarItem>
-                    <TextBlock Text="OCR Demo"></TextBlock>
+                    <TextBlock Text="OCR Demo" Name="ctlStatusPanel0"></TextBlock>
                 </StatusBarItem>
             </StatusBar>
-
+            <controls:CircularProgressBar x:Name="ctlBusy" Visibility="Visible" Panel.ZIndex="2"></controls:CircularProgressBar>
         </Grid>
     </Border>
 </Window>

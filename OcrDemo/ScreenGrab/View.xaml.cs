@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,15 +14,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OcrDemo.Contracts.interfaces;
 
 namespace OcrDemo.ScreenGrab
 {
     /// <summary>
     /// Interaction logic for View.xaml
     /// </summary>
-    public partial class View : UserControl
+    [Export(typeof(OcrDemo.Contracts.interfaces.IPluginTabbedView))]
+    [ExportMetadata(OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGINNAME, "screengrab")]
+    [ExportMetadata(OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGIN_TAB_TITLE, "Screen grab")]
+    public partial class View : UserControl, OcrDemo.Contracts.interfaces.IPluginTabbedView
     {
         System.Windows.Forms.PictureBox ctlPicBox;
+        public DataContext ViewModel
+        {
+            get
+            {
+                return this.Resources["theModel"] as DataContext;
+            }
+        }
+
+        public IMainView Main { get ; set ; }
+
         public View()
         {
             InitializeComponent();
@@ -46,9 +62,21 @@ namespace OcrDemo.ScreenGrab
             ctlPicBox.Image = null;
         }
 
-        private void BtnOCR_Click(object sender, RoutedEventArgs e)
+        private async void BtnOCR_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("OCR - to be done");
+            //MessageBox.Show("OCR - to be done");
+            Task t = new Task(this.ViewModel.DoOcr);
+            this.Main.IsBusy = true;
+            Main.SetStatus(0, "Long operation is in progress");
+            t.Start();
+            await t;
+            this.Main.IsBusy = false;
+            Main.SetStatus(0, "Long operation is complete");
+        }
+
+        public void OnActivate()
+        {
+            
         }
     }
 }

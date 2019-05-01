@@ -59,6 +59,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TabItemWrapper.cs" />
+    <Compile Include="MEFHost.cs" />
     <Compile Include="ScreenGrab\DataContext.cs" />
     <Compile Include="ScreenGrab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -66,6 +71,10 @@
     <Compile Include="Settings\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,6 +121,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OcrDemo.Contracts\OcrDemo.Contracts.csproj">
+      <Project>{866fdee4-3d6d-4492-9e50-d0005a9da469}</Project>
+      <Name>OcrDemo.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition">
+      <Version>4.5.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

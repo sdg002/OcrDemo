@@ -18,18 +18,61 @@ namespace OcrDemo
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, OcrDemo.Contracts.interfaces.IMainView
     {
-        List<TabPlugin> _plugins = new List<TabPlugin>();
+        MEFHost _hostMef;
         public MainWindow()
         {
             InitializeComponent();
+            InitMef();
             this.Loaded += MainWindow_Loaded;
-            Plugins.Add(new TabPlugin("OcrDemo.ScreenGrab.View", "Simple Screen grab"));
-            Plugins.Add(new TabPlugin("OcrDemo.Settings.View", "Settings"));
+            ctlTabMain.SelectionChanged += CtlTabMain_SelectionChanged;
         }
 
-        internal List<TabPlugin> Plugins { get => _plugins;  }
+        private void CtlTabMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TabControl tab = sender as TabControl;
+            var tItem = tab.SelectedItem as Controls.TabItemWrapper;
+            if (tItem.Plugin.IsValueCreated==false)
+            {
+                tItem.Content = tItem.Plugin.Value;
+                tItem.Plugin.Value.Main = this;
+            }
+            tItem.Plugin.Value.OnActivate();
+        }
+
+        private void InitMef()
+        {
+            _hostMef = new MEFHost();
+
+        }
+
+        public bool IsBusy
+        {
+            get
+            {
+                if (ctlBusy.Visibility == Visibility.Visible)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                if (value == true)
+                {
+                    ctlBusy.Visibility = Visibility.Visible;
+                    ctlBusy.BringIntoView();
+                }
+                else
+                {
+                    ctlBusy.Visibility = Visibility.Hidden;
+                }
+            }
+        }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -38,8 +81,13 @@ namespace OcrDemo
 
         private void LoadPlugins()
         {
-            foreach(var plugin in this.Plugins)
+            foreach(var plugin in _hostMef.Plugins)
             {
+                var tItem = new OcrDemo.Controls.TabItemWrapper();
+                tItem.Plugin = plugin;
+                tItem.Header = plugin.Metadata[OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGIN_TAB_TITLE];
+                ctlTabMain.Items.Add(tItem);
+                /*
                 TabItem tItem = new TabItem();
                 Type tyPlugin=Type.GetType(plugin.TypeName, false, false);
                 Object ctl=Activator.CreateInstance(tyPlugin);
@@ -50,7 +98,20 @@ namespace OcrDemo
                 tItem.Content = ctl;
                 tItem.Header = plugin.TabTitle;
                 ctlTabMain.Items.Add(tItem);
+                */
             }
+        }
+
+        public void SetStatus(int panel, string text)
+        {
+            if (panel != 0) throw new ArgumentException($"The panel index should be 0");
+            ctlStatusPanel0.Text = text;
+        }
+
+        public string GetStatus(int panel, string text)
+        {
+            if (panel != 0) throw new ArgumentException($"The panel index should be 0");
+            return ctlStatusPanel0.Text;
         }
     }
     /// <summary>
@@ -77,3 +138,7 @@ namespace OcrDemo
         }
     }
 }
+
+//TODO Get user control from MEF demo for progrss bar
+//TODO Create OCR account in AWS
+//TODO Do a simple OCR and examine the output
