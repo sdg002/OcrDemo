@@ -10,6 +10,11 @@ namespace OcrDemo.Contracts.interfaces
     public interface IPluginTabbedView
     {
         /// <summary>
+        /// Fired only once, immediately after creation and after Main has been set
+        /// The plugin can use this do any initializations. e.g. set up event handlers
+        /// </summary>
+        void OnInit();
+        /// <summary>
         /// This holds an instance to the main UI
         /// </summary>
         IMainView Main { get; set; }

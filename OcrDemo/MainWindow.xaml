@@ -25,8 +25,11 @@
                 <StatusBarItem>
                     <TextBlock Text="OCR Demo" Name="ctlStatusPanel0"></TextBlock>
                 </StatusBarItem>
+                <StatusBarItem>
+                    
+                </StatusBarItem>
             </StatusBar>
-            <controls:CircularProgressBar x:Name="ctlBusy" Visibility="Visible" Panel.ZIndex="2"></controls:CircularProgressBar>
+            <controls:CircularProgressBar x:Name="ctlBusy" Visibility="Collapsed" Panel.ZIndex="2"></controls:CircularProgressBar>
         </Grid>
     </Border>
 </Window>

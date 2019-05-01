@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,9 +20,10 @@ namespace OcrDemo
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, OcrDemo.Contracts.interfaces.IMainView
+    public partial class MainWindow : Window, OcrDemo.Contracts.interfaces.IMainView, INotifyPropertyChanged
     {
         MEFHost _hostMef;
+        public event PropertyChangedEventHandler PropertyChanged;
         public MainWindow()
         {
             InitializeComponent();
@@ -37,6 +40,7 @@ namespace OcrDemo
             {
                 tItem.Content = tItem.Plugin.Value;
                 tItem.Plugin.Value.Main = this;
+                tItem.Plugin.Value.OnInit();
             }
             tItem.Plugin.Value.OnActivate();
         }
@@ -65,12 +69,15 @@ namespace OcrDemo
                 if (value == true)
                 {
                     ctlBusy.Visibility = Visibility.Visible;
-                    ctlBusy.BringIntoView();
+                    //ctlBusy.BringIntoView();//Was tyring to reveal the progress bar
+                    //But when you have a Windows Forms Host, it is going to hide everything WPF
+                    //https://stackoverflow.com/questions/9920480/windowsformshost-is-always-the-most-top-from-wpf-element
                 }
                 else
                 {
                     ctlBusy.Visibility = Visibility.Hidden;
                 }
+                NotifyPropertyChanged();
             }
         }
 
@@ -112,6 +119,10 @@ namespace OcrDemo
         {
             if (panel != 0) throw new ArgumentException($"The panel index should be 0");
             return ctlStatusPanel0.Text;
+        }
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
     /// <summary>

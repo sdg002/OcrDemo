@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
@@ -77,6 +78,20 @@ namespace OcrDemo.ScreenGrab
         public void OnActivate()
         {
             
+        }
+
+        public void OnInit()
+        {
+            INotifyPropertyChanged notifier = this.Main as INotifyPropertyChanged;
+            notifier.PropertyChanged += Notifier_PropertyChanged;
+        }
+
+        private void Notifier_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName==nameof(this.Main.IsBusy))
+            {
+                ctlToolBar.IsEnabled = !this.Main.IsBusy;
+            }
         }
     }
 }

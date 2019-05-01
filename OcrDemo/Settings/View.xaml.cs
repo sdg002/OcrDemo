@@ -36,5 +36,10 @@ namespace OcrDemo.Settings
         {
             
         }
+
+        public void OnInit()
+        {
+            
+        }
     }
 }
