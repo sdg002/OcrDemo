@@ -9,8 +9,8 @@ namespace Aws
     {
         public AwsRekognition()
         {
-            this.AccessKeyId = "AKIA4DDH53HIIT3TOZUD";
-            this.AccessKeySecret = "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";
+            this.AccessKeyId = "";
+            this.AccessKeySecret = "";
             this.EndPoint = "rekognition.eu-west-1.amazonaws.com	";
         }
         public string AccessKeyId { get; set; }
