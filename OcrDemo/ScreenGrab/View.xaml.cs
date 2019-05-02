@@ -56,11 +56,27 @@ namespace OcrDemo.ScreenGrab
             var oClip = System.Windows.Forms.Clipboard.GetImage();
             if (oClip == null) return;
             ctlPicBox.Image = oClip;
+            ViewModel.ImageBytes = BytesFromImage();
+        }
+        /// <summary>
+        /// Gets the raw bytes from the currently loaded image
+        /// </summary>
+        /// <returns></returns>
+        private byte[] BytesFromImage()
+        {
+            byte[] raw = null;
+            using (var mem = new System.IO.MemoryStream())
+            {
+                ctlPicBox.Image.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
+                raw = mem.ToArray();
+            }
+            return raw;
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
             ctlPicBox.Image = null;
+            ViewModel.Clear();
         }
 
         private async void BtnOCR_Click(object sender, RoutedEventArgs e)
@@ -75,21 +91,14 @@ namespace OcrDemo.ScreenGrab
                 MessageBox.Show("No image was found. Paste some image before attempting an OCR");
                 return;
             }
-            byte[] raw = null;
-            using (var mem = new System.IO.MemoryStream())
-            {
-                ctlPicBox.Image.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
-                raw = mem.ToArray();
-            }
-
-            ViewModel.ImageBytes = raw;
+            ViewModel.LastOcrResults = null;
             Task t = new Task(this.ViewModel.DoOcr);
             this.Main.IsBusy = true;
             Main.SetStatus(0, "OCR is in progress");
             t.Start();
             await t;
             this.Main.IsBusy = false;
-            Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LasOcrResults.Results.Length} text objects");
+            Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Results.Length} text objects");
         }
 
         public void OnActivate()
@@ -115,5 +124,66 @@ namespace OcrDemo.ScreenGrab
                 ctlToolBar.IsEnabled = !this.Main.IsBusy;
             }
         }
+
+        private void CtlLaunchViewer_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.ImageBytes == null)
+            {
+                MessageBox.Show("No Image has been captured.");
+                return;
+            }
+            if (ViewModel.LastOcrResults == null)
+            {
+                MessageBox.Show("No OCR results were found. Paste an image and click on OCR button");
+                return;
+            }
+            /*
+             * Task class did not work with ShowDialog, but Thread works very well
+            if (_tskResultsDialog == null || _tskResultsDialog.IsCanceled || _tskResultsDialog.IsCompleted)
+            {
+                _tskResultsDialog = new Task(LaunchResultsWindow);
+                _tskResultsDialog.Start();
+            }
+            else
+            {
+                //Already existing window
+                _winOcrResults.RenderImage(this.ViewModel.ImageBytes);
+                _winOcrResults.Activate();
+
+            }
+            */
+            if (_tResults == null || _tResults.ThreadState != ThreadState.Running || _winOcrResults == null)
+            {
+                _tResults = new Thread(new ThreadStart(this.LaunchResultsWindow));
+                _tResults.SetApartmentState(ApartmentState.STA);
+                _tResults.Start();
+            }
+            else
+            {
+                _winOcrResults.Dispatcher.Invoke(() =>
+                {
+                    _winOcrResults.RenderImage(this.ViewModel.ImageBytes, this.ViewModel.LastOcrResults);
+                    _winOcrResults.WindowState = WindowState.Normal;
+                    _winOcrResults.Activate();
+                });
+            }
+        }
+        OcrDemo.UI.Lib.OcrResults _winOcrResults = null;
+        Thread _tResults;
+        [STAThread]
+        private void LaunchResultsWindow()
+        {
+            _winOcrResults = new UI.Lib.OcrResults();
+            _winOcrResults.RenderImage(this.ViewModel.ImageBytes,this.ViewModel.LastOcrResults);
+            _winOcrResults.ShowDialog();
+
+            //Application.Current.Dispatcher.Invoke(() =>
+            //{
+            //    _winOcrResults = new UI.Lib.OcrResults();
+            //    _winOcrResults.ShowDialog();
+            //});
+        }
+
+        Task _tskResultsDialog;
     }
 }

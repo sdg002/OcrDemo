@@ -1,0 +1,22 @@
+﻿<Window x:Class="OcrDemo.UI.Lib.OcrResults"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OcrDemo.UI.Lib"
+        mc:Ignorable="d"
+        ResizeMode="CanResizeWithGrip"
+        Title="OCR Results" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WindowsFormsHost Name="ctlWindowsFormsHost"/>
+        <StatusBar Grid.Row="1">
+            <StatusBarItem>
+                <TextBlock Text="" Name="ctlStatusPanel0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

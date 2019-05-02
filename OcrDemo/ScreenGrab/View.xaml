@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OcrDemo.ScreenGrab"
              mc:Ignorable="d" 
+             xmlns:tkconv="clr-namespace:Xceed.Wpf.Toolkit.Core.Converters;assembly=Xceed.Wpf.Toolkit"
              xmlns:controls="clr-namespace:OcrDemo.controls"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -13,6 +14,8 @@
             <Setter Property="Margin" Value="0,0,6,0"></Setter>
         </Style>
         <local:DataContext x:Key="theModel"></local:DataContext>
+        <tkconv:InverseBoolConverter x:Key="convInverseBool"> </tkconv:InverseBoolConverter>
+        <tkconv:NullToBoolConverter x:Key="convNull2Bool"></tkconv:NullToBoolConverter>
     </UserControl.Resources>
     <Grid DataContext="{StaticResource theModel}">
         <Grid.RowDefinitions>
@@ -21,12 +24,19 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Height="24" Background="WhiteSmoke" Name="ctlToolBar">
             <Button ToolTip="Copy picture from clipboard"  Style="{StaticResource stToolBarBtn}" Name="btnCopyImage" Click="BtnCopyImage_Click">Copy</Button>
-            <Button ToolTip="Clear the picture box" Style="{StaticResource stToolBarBtn}" Name="btnClear" Click="BtnClear_Click">Clear</Button>
-            <Button ToolTip="Carry out OCR" Style="{StaticResource stToolBarBtn}" Name="btnOCR" Click="BtnOCR_Click">OCR</Button>
-            <TextBlock Text="Select OCR Engine"></TextBlock>
+            <TextBlock Text="Select OCR Engine" VerticalAlignment="Center"></TextBlock>
             <ComboBox IsReadOnly="True" ItemsSource="{Binding OcrEngines}" 
                       SelectedItem="{Binding SelectedOcrEngine}"
                       DisplayMemberPath="Description"></ComboBox>
+            <Button ToolTip="Carry out OCR" Style="{StaticResource stToolBarBtn}" Name="btnOCR" Click="BtnOCR_Click">OCR</Button>
+            <Button Name="ctlLaunchViewer" 
+                        Click="CtlLaunchViewer_Click" 
+                    
+                        ToolTip="Launch viewer to render the results of OCR in a separate window">View Text Objects</Button>
+            <!--
+            You will need a converter to Enable the View Results button , something like NULL 2 Visibility or NULL 2 Bool(true)
+            IsEnabled="{Binding LastOcrResults,Converter={StaticResource convNull2Bool}}"-->
+            <Button ToolTip="Clear the picture box" Style="{StaticResource stToolBarBtn}" Name="btnClear" Click="BtnClear_Click">Clear</Button>
         </StackPanel>
         <WindowsFormsHost Grid.Row="1" Name="ctlHost" >
             

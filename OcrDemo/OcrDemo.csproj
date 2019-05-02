@@ -132,6 +132,10 @@
       <Project>{866fdee4-3d6d-4492-9e50-d0005a9da469}</Project>
       <Name>OcrDemo.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OcrDemo.UI.Lib\OcrDemo.UI.Lib.csproj">
+      <Project>{aa99d55b-3425-45ae-b2ca-60c9e433b09b}</Project>
+      <Name>OcrDemo.UI.Lib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.Rekognition">
