@@ -28,4 +28,23 @@ namespace OcrDemo
             _config = config;
         }
     }
+
+
+    [OcrDemo.Contracts.entity.OcrEngineExport("ocrspace", "Ocr Engine built on OCR.SPACE")]
+    public class OcrSpacePlugin : OcrDemo.Contracts.interfaces.IPluginOcrEngine
+    {
+        IConfiguration _config;
+        public TextExtractionResults DoOcr(byte[] image)
+        {
+            var engine = new OcrSpace.Ocr();   
+            engine.ApiKey = _config["ocrspace_accesskey"];
+            return engine.Extract(image);
+        }
+
+        public void OnInit(IConfiguration config)
+        {
+            _config = config;
+        }
+    }
+
 }

@@ -155,6 +155,10 @@
       <Project>{aa99d55b-3425-45ae-b2ca-60c9e433b09b}</Project>
       <Name>OcrDemo.UI.Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OcrSpace\OcrSpace.csproj">
+      <Project>{82134d98-3604-4fca-a51b-467915493398}</Project>
+      <Name>OcrSpace</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AWSSDK.Rekognition">

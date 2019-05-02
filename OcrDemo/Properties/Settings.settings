@@ -8,5 +8,8 @@
     <Setting Name="awsrekognition_secretaccesskey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ocrspace_accesskey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

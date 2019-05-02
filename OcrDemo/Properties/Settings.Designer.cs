@@ -46,5 +46,17 @@ namespace OcrDemo.Properties {
                 this["awsrekognition_secretaccesskey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ocrspace_accesskey {
+            get {
+                return ((string)(this["ocrspace_accesskey"]));
+            }
+            set {
+                this["ocrspace_accesskey"] = value;
+            }
+        }
     }
 }
