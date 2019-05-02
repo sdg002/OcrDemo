@@ -63,10 +63,19 @@
       <DependentUpon>CircularProgressBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TabItemWrapper.cs" />
+    <Compile Include="DebugView\DataContext.cs" />
+    <Compile Include="DebugView\View.xaml.cs">
+      <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MEFHost.cs" />
     <Compile Include="ScreenGrab\DataContext.cs" />
     <Compile Include="ScreenGrab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsDevOnly.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>SettingsDevOnly.settings</DependentUpon>
     </Compile>
     <Compile Include="Settings\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
@@ -75,6 +84,10 @@
     <Page Include="Controls\CircularProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="DebugView\View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -119,9 +132,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="SettingsDevOnly.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>SettingsDevOnly.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aws\Aws.csproj">
@@ -153,6 +172,12 @@
     <PackageReference Include="System.Drawing.Common">
       <Version>4.5.1</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\UnitTestProject1\Data\pics\NonReadable.PNG">
+      <Link>Samples\NonReadable.PNG</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
