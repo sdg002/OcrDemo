@@ -14,7 +14,7 @@
         </Style>
         <local:DataContext x:Key="theModel"></local:DataContext>
     </UserControl.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource theModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -23,8 +23,12 @@
             <Button ToolTip="Copy picture from clipboard"  Style="{StaticResource stToolBarBtn}" Name="btnCopyImage" Click="BtnCopyImage_Click">Copy</Button>
             <Button ToolTip="Clear the picture box" Style="{StaticResource stToolBarBtn}" Name="btnClear" Click="BtnClear_Click">Clear</Button>
             <Button ToolTip="Carry out OCR" Style="{StaticResource stToolBarBtn}" Name="btnOCR" Click="BtnOCR_Click">OCR</Button>
+            <TextBlock Text="Select OCR Engine"></TextBlock>
+            <ComboBox IsReadOnly="True" ItemsSource="{Binding OcrEngines}" 
+                      SelectedItem="{Binding SelectedOcrEngine}"
+                      DisplayMemberPath="Description"></ComboBox>
         </StackPanel>
-        <WindowsFormsHost Grid.Row="1" Name="ctlHost">
+        <WindowsFormsHost Grid.Row="1" Name="ctlHost" >
             
         </WindowsFormsHost>
     </Grid>

@@ -17,6 +17,15 @@ namespace OcrDemo
             container.ComposeParts(this);
         }
         [ImportMany]
-        public Lazy<OcrDemo.Contracts.interfaces.IPluginTabbedView, Dictionary<string, object>>[]  Plugins { get; set; }
+        public Lazy<OcrDemo.Contracts.interfaces.IPluginTabbedView, Dictionary<string, object>>[]  TabbedViews { get; set; }
+
+        [ImportMany]
+        //public Lazy<OcrDemo.Contracts.interfaces.IPluginOcrEngine, Dictionary<string, object>>[] OcrEngines { get; set; }
+        public Lazy<OcrDemo.Contracts.interfaces.IPluginOcrEngine, Contracts.interfaces.IPluginMetaData>[] OcrEngines { get; set; }
+    }
+    public class OcrEngineMeta
+    {
+        public string PluginName { get; set; }
+
     }
 }

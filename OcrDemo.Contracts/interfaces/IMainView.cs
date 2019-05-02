@@ -26,5 +26,9 @@ namespace OcrDemo.Contracts.interfaces
         /// <param name="text"></param>
         /// <returns></returns>
         string GetStatus(int panel, string text);
+        /// <summary>
+        /// Returns a list of all OCR engines that have been loaded. This helps a Tabbed view dynamically pick an OCR engine
+        /// </summary>
+        Lazy<OcrDemo.Contracts.interfaces.IPluginOcrEngine, Contracts.interfaces.IPluginMetaData>[] OcrEngines { get;  }
     }
 }

@@ -65,14 +65,31 @@ namespace OcrDemo.ScreenGrab
 
         private async void BtnOCR_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("OCR - to be done");
+            if (this.ViewModel.SelectedOcrEngine == null)
+            {
+                MessageBox.Show("Select an OCR engine");
+                return;
+            }
+            if (this.ctlPicBox.Image == null)
+            {
+                MessageBox.Show("No image was found. Paste some image before attempting an OCR");
+                return;
+            }
+            byte[] raw = null;
+            using (var mem = new System.IO.MemoryStream())
+            {
+                ctlPicBox.Image.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
+                raw = mem.ToArray();
+            }
+
+            ViewModel.ImageBytes = raw;
             Task t = new Task(this.ViewModel.DoOcr);
             this.Main.IsBusy = true;
-            Main.SetStatus(0, "Long operation is in progress");
+            Main.SetStatus(0, "OCR is in progress");
             t.Start();
             await t;
             this.Main.IsBusy = false;
-            Main.SetStatus(0, "Long operation is complete");
+            Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LasOcrResults.Results.Length} text objects");
         }
 
         public void OnActivate()
@@ -82,8 +99,13 @@ namespace OcrDemo.ScreenGrab
 
         public void OnInit()
         {
+            ViewModel.Main = Main;
             INotifyPropertyChanged notifier = this.Main as INotifyPropertyChanged;
             notifier.PropertyChanged += Notifier_PropertyChanged;
+            foreach(var ocr in Main.OcrEngines)
+            {
+                this.ViewModel.OcrEngines.Add(ocr.Metadata);
+            }
         }
 
         private void Notifier_PropertyChanged(object sender, PropertyChangedEventArgs e)

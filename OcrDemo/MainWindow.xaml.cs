@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OcrDemo.Contracts.interfaces;
 
 namespace OcrDemo
 {
@@ -81,14 +82,41 @@ namespace OcrDemo
             }
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public Lazy<IPluginOcrEngine, IPluginMetaData>[] OcrEngines
         {
-            LoadPlugins();
+            get
+            {
+                return _hostMef.OcrEngines;
+            }
         }
 
-        private void LoadPlugins()
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach(var plugin in _hostMef.Plugins)
+            LoadTabbedPlugins();
+            LoadOcrEnginePlugins();
+        }
+
+        private void LoadOcrEnginePlugins()
+        {
+            var configbuilder = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
+            var configSourceMemory = new Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource();
+            configbuilder.Add(configSourceMemory);
+            Microsoft.Extensions.Configuration.IConfiguration config = configbuilder.Build();
+            foreach (System.Configuration.SettingsProperty prop in Properties.Settings.Default.Properties)
+            {
+                config[prop.Name] = $"{Properties.Settings.Default[prop.Name]}"; ;
+            }
+            foreach (var plugin in _hostMef.OcrEngines)
+            {
+                var ocr = plugin.Value;
+
+                ocr.OnInit(config);
+            }
+        }
+
+        private void LoadTabbedPlugins()
+        {
+            foreach(var plugin in _hostMef.TabbedViews)
             {
                 var tItem = new OcrDemo.Controls.TabItemWrapper();
                 tItem.Plugin = plugin;
