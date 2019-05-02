@@ -150,6 +150,7 @@ namespace OcrDemo
     }
 }
 
-//TODO Get user control from MEF demo for progrss bar
-//TODO Create OCR account in AWS
-//TODO Do a simple OCR and examine the output
+//TODO simple settings name-value pair , group by plugin name e.g. blahocr_accesskey blahocr_password (Xceed property grid)
+//TODO Wire up OCR engine to UI and carry out long running operation
+//TODO Show results in another modeless window (display a blank picture, and overlay text boxes)
+

@@ -14,6 +14,8 @@ namespace UnitTestProject1
         public void AwsRekognitionHelloWorld()
         {
             Aws.AwsRekognition ocr = new Aws.AwsRekognition();
+            ocr.AccessKeyId = Environment.GetEnvironmentVariable("awsrekognition_accesskeyid");
+            ocr.AccessKeySecret = Environment.GetEnvironmentVariable("awsrekognition_secretaccesskey");
             string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\pics\\NonReadable.PNG");
             byte[] raw = System.IO.File.ReadAllBytes(pathSample);
             var results=ocr.Extract(raw);
