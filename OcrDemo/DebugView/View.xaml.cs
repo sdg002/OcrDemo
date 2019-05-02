@@ -66,9 +66,27 @@ namespace OcrDemo.DebugView
                 return;
             }
             OcrDemo.UI.Lib.OcrResults win = new UI.Lib.OcrResults();
+            Contracts.entity.TextExtractionResults lastOcrResults = new Contracts.entity.TextExtractionResults
+            {
+                Results = new Contracts.entity.TextResult[]
+                {
+                    new Contracts.entity.TextResult
+                    {
+                        Text="hello",
+                        X1=100, X2=150,
+                        Y1=100, Y2=150
+                    },
+                    new Contracts.entity.TextResult
+                    {
+                        Text="hello 2",
+                        X1=200, X2=250,
+                        Y1=200, Y2=250
+                    }
+                }
+            };
             var bytes = System.IO.File.ReadAllBytes(ViewModel.SampleImage);
 
-            win.RenderImage(bytes, null);
+            win.RenderImage(bytes, lastOcrResults);
             win.Show();
             ViewModel.SaveSettings();
         }
