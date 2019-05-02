@@ -178,6 +178,7 @@ namespace OcrDemo
     }
 }
 
-//TODO Investigate why are coordinates negative , especially when you 
+//TODO Investigate why are coordinates negative , use 2 lines near the upper border
+//TODO Why are text elements missed out - Phytopharm, lower part of the para
 
 

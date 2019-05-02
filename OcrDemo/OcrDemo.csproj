@@ -180,9 +180,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\UnitTestProject1\Data\pics\Phytopharm.PNG">
+    <None Include="..\UnitTestProject1\Data\pics\Phytopharm.PNG">
       <Link>Samples\Phytopharm.PNG</Link>
-    </Resource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -23,7 +23,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Height="24" Background="WhiteSmoke" Name="ctlToolBar">
-            <Button ToolTip="Copy picture from clipboard"  Style="{StaticResource stToolBarBtn}" Name="btnCopyImage" Click="BtnCopyImage_Click">Copy</Button>
+            <Button ToolTip="Paste picture from clipboard"  Style="{StaticResource stToolBarBtn}" Name="btnCopyImage" Click="BtnCopyImage_Click">Paste</Button>
             <TextBlock Text="Select OCR Engine" VerticalAlignment="Center"></TextBlock>
             <ComboBox IsReadOnly="True" ItemsSource="{Binding OcrEngines}" 
                       SelectedItem="{Binding SelectedOcrEngine}"

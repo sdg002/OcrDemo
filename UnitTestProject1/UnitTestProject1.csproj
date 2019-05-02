@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AwsTest.cs" />
+    <Compile Include="OcrSpaceTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\Util.cs" />
@@ -70,6 +71,10 @@
     <ProjectReference Include="..\OcrDemo.Contracts\OcrDemo.Contracts.csproj">
       <Project>{866fdee4-3d6d-4492-9e50-d0005a9da469}</Project>
       <Name>OcrDemo.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OcrSpace\OcrSpace.csproj">
+      <Project>{82134d98-3604-4fca-a51b-467915493398}</Project>
+      <Name>OcrSpace</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

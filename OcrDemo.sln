@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aws", "Aws\Aws.csproj", "{D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcrDemo.UI.Lib", "OcrDemo.UI.Lib\OcrDemo.UI.Lib.csproj", "{AA99D55B-3425-45AE-B2CA-60C9E433B09B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcrSpace", "OcrSpace\OcrSpace.csproj", "{82134D98-3604-4FCA-A51B-467915493398}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AA99D55B-3425-45AE-B2CA-60C9E433B09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA99D55B-3425-45AE-B2CA-60C9E433B09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA99D55B-3425-45AE-B2CA-60C9E433B09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82134D98-3604-4FCA-A51B-467915493398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82134D98-3604-4FCA-A51B-467915493398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82134D98-3604-4FCA-A51B-467915493398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82134D98-3604-4FCA-A51B-467915493398}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
