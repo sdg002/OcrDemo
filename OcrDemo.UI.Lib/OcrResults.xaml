@@ -12,7 +12,15 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <WindowsFormsHost Name="ctlWindowsFormsHost"/>
+        <TabControl>
+            <TabItem Header="Bounding boxes">
+                <WindowsFormsHost Name="ctlWindowsFormsHost"/>        
+            </TabItem>
+            <TabItem Header="Raw JSON">
+                <TextBox AcceptsReturn="True" AcceptsTab="True" Name="ctlJsonViewer" VerticalScrollBarVisibility="Visible"></TextBox>
+            </TabItem>
+        </TabControl>
+        
         <StatusBar Grid.Row="1">
             <StatusBarItem>
                 <TextBlock Text="" Name="ctlStatusPanel0"></TextBlock>

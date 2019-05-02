@@ -86,7 +86,7 @@ namespace OcrDemo.DebugView
             };
             var bytes = System.IO.File.ReadAllBytes(ViewModel.SampleImage);
 
-            win.RenderImage(bytes, lastOcrResults);
+            win.RenderImageWithOverlay(bytes, lastOcrResults);
             win.Show();
             ViewModel.SaveSettings();
         }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using OcrDemo.Contracts.entity;
 
 namespace OcrDemo.UI.Lib
 {
@@ -32,7 +33,31 @@ namespace OcrDemo.UI.Lib
         {
             
         }
-        public void RenderImage(byte[] raw, Contracts.entity.TextExtractionResults lastOcrResults)
+        public void RenderImageWithOverlay(byte[] raw, Contracts.entity.TextExtractionResults lastOcrResults)
+        {
+            RenderImage(raw, lastOcrResults);
+            RenderJson(lastOcrResults);
+        }
+
+        private void RenderJson(TextExtractionResults lastOcrResults)
+        {
+            try
+            {
+                var settings = new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    Formatting = Newtonsoft.Json.Formatting.Indented,
+                };
+                string text=Newtonsoft.Json.JsonConvert.SerializeObject(lastOcrResults, settings);
+                ctlJsonViewer.Text = "";
+                ctlJsonViewer.Text = text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void RenderImage(byte[] raw, TextExtractionResults lastOcrResults)
         {
             Contracts.entity.TextExtractionResults ocr = null;
             if (lastOcrResults == null)
@@ -73,13 +98,12 @@ namespace OcrDemo.UI.Lib
                         int xUpperLeft = (int)Math.Min(box.X1, box.X2);
                         int yUpperLeft = (int)Math.Min(box.Y1, box.Y2);
                         float width = (float)Math.Abs(box.X1 - box.X2);
-                        float ht = (float)Math.Abs(box.Y1-box.Y2);
+                        float ht = (float)Math.Abs(box.Y1 - box.Y2);
                         g.DrawRectangle(pen, xUpperLeft, yUpperLeft, width, ht);
-                        g.FillRectangle(b,  xUpperLeft, yUpperLeft, width, ht);
+                        g.FillRectangle(b, xUpperLeft, yUpperLeft, width, ht);
                     }
                 }
             }
-
         }
     }
 }

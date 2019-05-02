@@ -178,7 +178,6 @@ namespace OcrDemo
     }
 }
 
-//TODO simple settings name-value pair , group by plugin name e.g. blahocr_accesskey blahocr_password (Xceed property grid)
-//TODO Wire up OCR engine to UI and carry out long running operation
-//TODO Show results in another modeless window (display a blank picture, and overlay text boxes)
+//TODO Investigate why are coordinates negative , especially when you 
+
 

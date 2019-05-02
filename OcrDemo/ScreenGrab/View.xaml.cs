@@ -162,7 +162,7 @@ namespace OcrDemo.ScreenGrab
             {
                 _winOcrResults.Dispatcher.Invoke(() =>
                 {
-                    _winOcrResults.RenderImage(this.ViewModel.ImageBytes, this.ViewModel.LastOcrResults);
+                    _winOcrResults.RenderImageWithOverlay(this.ViewModel.ImageBytes, this.ViewModel.LastOcrResults);
                     _winOcrResults.WindowState = WindowState.Normal;
                     _winOcrResults.Activate();
                 });
@@ -174,16 +174,8 @@ namespace OcrDemo.ScreenGrab
         private void LaunchResultsWindow()
         {
             _winOcrResults = new UI.Lib.OcrResults();
-            _winOcrResults.RenderImage(this.ViewModel.ImageBytes,this.ViewModel.LastOcrResults);
+            _winOcrResults.RenderImageWithOverlay(this.ViewModel.ImageBytes,this.ViewModel.LastOcrResults);
             _winOcrResults.ShowDialog();
-
-            //Application.Current.Dispatcher.Invoke(() =>
-            //{
-            //    _winOcrResults = new UI.Lib.OcrResults();
-            //    _winOcrResults.ShowDialog();
-            //});
         }
-
-        Task _tskResultsDialog;
     }
 }
