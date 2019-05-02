@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcrLib", "OcrLib\OcrLib.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcrDemo.Contracts", "OcrDemo.Contracts\OcrDemo.Contracts.csproj", "{866FDEE4-3D6D-4492-9E50-D0005A9DA469}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{60DB0CFB-2192-4F47-A515-4936DA224A30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{866FDEE4-3D6D-4492-9E50-D0005A9DA469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{866FDEE4-3D6D-4492-9E50-D0005A9DA469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{866FDEE4-3D6D-4492-9E50-D0005A9DA469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60DB0CFB-2192-4F47-A515-4936DA224A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60DB0CFB-2192-4F47-A515-4936DA224A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60DB0CFB-2192-4F47-A515-4936DA224A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60DB0CFB-2192-4F47-A515-4936DA224A30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
