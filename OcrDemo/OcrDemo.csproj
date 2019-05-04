@@ -67,6 +67,7 @@
     <Compile Include="DebugView\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="entity\ConfigWrapperOverProperties.cs" />
     <Compile Include="MEFHost.cs" />
     <Compile Include="ScreenGrab\DataContext.cs" />
     <Compile Include="ScreenGrab\View.xaml.cs">

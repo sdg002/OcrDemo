@@ -98,20 +98,20 @@ namespace OcrDemo
 
         private void LoadOcrEnginePlugins()
         {
-            var configbuilder = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
-            var configSourceMemory = new Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource();
-            configbuilder.Add(configSourceMemory);
-            Microsoft.Extensions.Configuration.IConfiguration config = configbuilder.Build();
-            foreach (System.Configuration.SettingsProperty prop in Properties.Settings.Default.Properties)
-            {
-                config[prop.Name] = $"{Properties.Settings.Default[prop.Name]}"; ;
-            }
-            foreach (var plugin in _hostMef.OcrEngines)
-            {
-                var ocr = plugin.Value;
+            //var configbuilder = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
+            //var configSourceMemory = new Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource();
+            //configbuilder.Add(configSourceMemory);
+            //Microsoft.Extensions.Configuration.IConfiguration config = configbuilder.Build();
+            //foreach (System.Configuration.SettingsProperty prop in Properties.Settings.Default.Properties)
+            //{
+            //    config[prop.Name] = $"{Properties.Settings.Default[prop.Name]}"; ;
+            //}
+            //foreach (var plugin in _hostMef.OcrEngines)
+            //{
+            //    var ocr = plugin.Value;
 
-                ocr.OnInit(config);
-            }
+            //    ocr.OnInit(config);
+            //}
         }
 
         private void LoadTabbedPlugins()
@@ -177,8 +177,14 @@ namespace OcrDemo
         }
     }
 }
+//TODO Scroll bar on pasted Image window
+//TODO Scroll bar on Results window
+//TODO Handle error when Access Key parameters not provided
+//TODO Enable OCR button only when engine is selected (look for Converters nuget package)
+//TODO Show some progress - a modal dialog with spinner OR a thin progress indicator in the toolbar
+//TODO Try Windows 7 theme from Extended toolkit
+//TODO Investigate if it is possible to handle and event when MEF Lazy object is initialized (Try using a Func delegate , how to tie it up to an instance?)
+//TODO AWS-Investigate why are coordinates negative , use 2 lines near the upper border
 
-//TODO Investigate why are coordinates negative , use 2 lines near the upper border
-//TODO Why are text elements missed out - Phytopharm, lower part of the para
 
 

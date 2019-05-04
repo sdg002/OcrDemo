@@ -81,24 +81,37 @@ namespace OcrDemo.ScreenGrab
 
         private async void BtnOCR_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ViewModel.SelectedOcrEngine == null)
+            try
             {
-                MessageBox.Show("Select an OCR engine");
-                return;
+                if (this.ViewModel.SelectedOcrEngine == null)
+                {
+                    MessageBox.Show("Select an OCR engine");
+                    return;
+                }
+                if (this.ctlPicBox.Image == null)
+                {
+                    MessageBox.Show("No image was found. Paste some image before attempting an OCR");
+                    return;
+                }
+                ViewModel.LastOcrResults = null;
+                Task t = new Task(this.ViewModel.DoOcr);
+                this.Main.IsBusy = true;
+                Main.SetStatus(0, "OCR is in progress");
+                t.Start();
+                await t;
+                this.Main.IsBusy = false;
+                Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Results.Length} text objects");
             }
-            if (this.ctlPicBox.Image == null)
+            catch (Exception ex)
             {
-                MessageBox.Show("No image was found. Paste some image before attempting an OCR");
-                return;
+                System.Windows.MessageBox.Show(ex.ToString(),"Error");
+                Main.SetStatus(0, ex.Message);
+                this.Main.IsBusy = false;
             }
-            ViewModel.LastOcrResults = null;
-            Task t = new Task(this.ViewModel.DoOcr);
-            this.Main.IsBusy = true;
-            Main.SetStatus(0, "OCR is in progress");
-            t.Start();
-            await t;
-            this.Main.IsBusy = false;
-            Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Results.Length} text objects");
+            finally
+            {
+
+            }
         }
 
         public void OnActivate()

@@ -14,7 +14,10 @@
         </Grid.RowDefinitions>
         <TabControl>
             <TabItem Header="Bounding boxes">
-                <WindowsFormsHost Name="ctlWindowsFormsHost"/>        
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <WindowsFormsHost Name="ctlWindowsFormsHost" />
+                </ScrollViewer>
+                
             </TabItem>
             <TabItem Header="Raw JSON">
                 <TextBox AcceptsReturn="True" AcceptsTab="True" Name="ctlJsonViewer" VerticalScrollBarVisibility="Visible"></TextBox>

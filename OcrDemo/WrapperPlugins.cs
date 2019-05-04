@@ -14,18 +14,18 @@ namespace OcrDemo
     //[ExportMetadata(OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGIN_TAB_TITLE, "Ocr Engine built on AWS Rekognition")]
     public class AwsOcrPlugin : OcrDemo.Contracts.interfaces.IPluginOcrEngine
     {
-        IConfiguration _config;
+        [Import()]
+        public IConfiguration Config { get; set ; }
+
         public TextExtractionResults DoOcr(byte[] image)
         {
+            if (Config == null) throw new InvalidOperationException($"The property {nameof(Config)} has not been initialized");
             Aws.AwsRekognition engine = new Aws.AwsRekognition();
-            engine.AccessKeyId = _config["awsrekognition_accesskeyid"];
-            engine.AccessKeySecret = _config["awsrekognition_secretaccesskey"];
+            engine.AccessKeyId = Config["awsrekognition_accesskeyid"];
+            engine.AccessKeySecret = Config["awsrekognition_secretaccesskey"];
+            if (string.IsNullOrWhiteSpace(engine.AccessKeyId)) throw new InvalidOperationException($"The setting 'awsrekognition_accesskeyid' has not been initialized");
+            if (string.IsNullOrWhiteSpace(engine.AccessKeySecret)) throw new InvalidOperationException($"The setting 'awsrekognition_secretaccesskey' has not been initialized");
             return engine.Extract(image);
-        }
-
-        public void OnInit(IConfiguration config)
-        {
-            _config = config;
         }
     }
 
@@ -33,17 +33,14 @@ namespace OcrDemo
     [OcrDemo.Contracts.entity.OcrEngineExport("ocrspace", "Ocr Engine built on OCR.SPACE")]
     public class OcrSpacePlugin : OcrDemo.Contracts.interfaces.IPluginOcrEngine
     {
-        IConfiguration _config;
+        [Import()]
+        public IConfiguration Config { get; set; }
         public TextExtractionResults DoOcr(byte[] image)
         {
+            if (Config == null) throw new InvalidOperationException($"The property {nameof(Config)} has not been initialized");
             var engine = new OcrSpace.Ocr();   
-            engine.ApiKey = _config["ocrspace_accesskey"];
+            engine.ApiKey = Config["ocrspace_accesskey"];
             return engine.Extract(image);
-        }
-
-        public void OnInit(IConfiguration config)
-        {
-            _config = config;
         }
     }
 
