@@ -38,8 +38,15 @@
             IsEnabled="{Binding LastOcrResults,Converter={StaticResource convNull2Bool}}"-->
             <Button ToolTip="Clear the picture box" Style="{StaticResource stToolBarBtn}" Name="btnClear" Click="BtnClear_Click">Clear</Button>
         </StackPanel>
-        <WindowsFormsHost Grid.Row="1" Name="ctlHost" >
-            
-        </WindowsFormsHost>
+        <!--
+        Not using WPF image control because WindowsForms PictureBox is simpler
+        <Image Grid.Row="1" 
+               ScrollViewer.VerticalScrollBarVisibility="Visible" 
+               ScrollViewer.HorizontalScrollBarVisibility="Visible"> </Image>-->
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.Row="1">
+            <WindowsFormsHost  Name="ctlHost" >
+
+            </WindowsFormsHost>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -177,9 +177,10 @@ namespace OcrDemo
         }
     }
 }
+//TODO Azure Computer Vision . 1)Write a plugin using sample code at , use HTTP post
+//2)https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts/csharp-print-text
 //TODO Scroll bar on pasted Image window
 //TODO Scroll bar on Results window
-//TODO Handle error when Access Key parameters not provided
 //TODO Enable OCR button only when engine is selected (look for Converters nuget package)
 //TODO Show some progress - a modal dialog with spinner OR a thin progress indicator in the toolbar
 //TODO Try Windows 7 theme from Extended toolkit
