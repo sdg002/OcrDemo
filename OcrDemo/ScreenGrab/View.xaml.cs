@@ -124,9 +124,9 @@ namespace OcrDemo.ScreenGrab
             ViewModel.Main = Main;
             INotifyPropertyChanged notifier = this.Main as INotifyPropertyChanged;
             notifier.PropertyChanged += Notifier_PropertyChanged;
-            foreach(var ocr in Main.OcrEngines)
+            foreach(var ocr in Main.Plugins.OcrEngines)
             {
-                this.ViewModel.OcrEngines.Add(ocr.Metadata);
+                this.ViewModel.OcrEngines.Add(ocr);
             }
         }
 

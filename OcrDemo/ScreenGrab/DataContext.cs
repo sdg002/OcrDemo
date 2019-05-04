@@ -29,10 +29,9 @@ namespace OcrDemo.ScreenGrab
             {
                 throw new InvalidOperationException("OCR engine has not been selected");
             }
-            //Thread.Sleep(3000);
-            var engine = Main.OcrEngines.FirstOrDefault(ocr => ocr.Metadata.Name == this.SelectedOcrEngine.Name);
+            var engine = Main.Plugins.OcrEngines.FirstOrDefault(ocr => ocr.Name == this.SelectedOcrEngine.Name);
             if (engine == null) throw new InvalidOperationException($"OCR engine was not found. {this.SelectedOcrEngine.Name}");
-            this.LastOcrResults=engine.Value.DoOcr(this.ImageBytes);
+            this.LastOcrResults= (Main.Plugins.GetInstance(engine) as OcrDemo.Contracts.interfaces.IPluginOcrEngine).DoOcr(this.ImageBytes);
         }
         /// <summary>
         /// HOlds a reference to the results obtained from the last successful OCR engine

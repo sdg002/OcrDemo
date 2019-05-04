@@ -12,6 +12,7 @@ namespace OcrDemo.Contracts.interfaces
     {
         string Name { get; }
         string Description { get; }
-
+        string MefContractName { get;  }
+        Type MefContractType { get;  }
     }
 }

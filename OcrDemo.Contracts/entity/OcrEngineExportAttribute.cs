@@ -16,6 +16,10 @@ namespace OcrDemo.Contracts.entity
         public string Name { get;  }
         public string Description { get ; }
 
+        public string MefContractName => this.ContractName;
+
+        public Type MefContractType => this.ContractType;
+
         public OcrEngineExportAttribute(string name,string description) :base(typeof(OcrDemo.Contracts.interfaces.IPluginOcrEngine))
         {
             this.Name = name;

@@ -21,7 +21,7 @@ namespace OcrDemo
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, OcrDemo.Contracts.interfaces.IMainView, INotifyPropertyChanged
+    public partial class MainWindow : Window, IMainView, INotifyPropertyChanged
     {
         MEFHost _hostMef;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -87,6 +87,14 @@ namespace OcrDemo
             get
             {
                 return _hostMef.OcrEngines;
+            }
+        }
+
+        public IPluginManager Plugins
+        {
+            get
+            {
+                return new entity.PluginManager(_hostMef);
             }
         }
 
