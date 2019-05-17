@@ -58,5 +58,17 @@ namespace OcrDemo.Properties {
                 this["ocrspace_accesskey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string azure_accesskey {
+            get {
+                return ((string)(this["azure_accesskey"]));
+            }
+            set {
+                this["azure_accesskey"] = value;
+            }
+        }
     }
 }

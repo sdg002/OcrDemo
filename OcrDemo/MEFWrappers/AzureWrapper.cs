@@ -17,7 +17,10 @@ namespace OcrDemo.MEFWrappers
 
         public TextExtractionResults DoOcr(byte[] image)
         {
-            throw new NotImplementedException();
+            Azure.ComputerVisions engine = new Azure.ComputerVisions();
+            engine.Url = "https://uksouth.api.cognitive.microsoft.com/";
+            engine.AppKey = Config["azure_accesskey"];
+            return engine.Extract(image);
         }
     }
 }
