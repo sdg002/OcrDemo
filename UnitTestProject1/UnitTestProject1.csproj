@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AwsTest.cs" />
+    <Compile Include="AzureTest.cs" />
     <Compile Include="OcrSpaceTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Data\aws\credentials.csv" />
+    <None Include="Data\azure\SampleResponse.json" />
     <None Include="Data\pdfs\Non-text-searchable.pdf" />
     <None Include="Data\pdfs\SampleScanned-Slerexe.pdf" />
     <None Include="Data\pdfs\scanned_example_1.pdf" />
@@ -67,6 +69,10 @@
     <ProjectReference Include="..\Aws\Aws.csproj">
       <Project>{dfff4f41-dc7e-4b2a-9896-03ecdbdf7019}</Project>
       <Name>Aws</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Azure\Azure.csproj">
+      <Project>{51ea8558-d295-4c23-85f7-6995aa1fd31b}</Project>
+      <Name>Azure</Name>
     </ProjectReference>
     <ProjectReference Include="..\OcrDemo.Contracts\OcrDemo.Contracts.csproj">
       <Project>{866fdee4-3d6d-4492-9e50-d0005a9da469}</Project>

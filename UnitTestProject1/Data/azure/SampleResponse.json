@@ -1,0 +1,290 @@
+﻿{
+  "language": "en",
+  "textAngle": 0.0,
+  "orientation": "Up",
+  "regions": [
+    {
+      "boundingBox": "69,90,1304,250",
+      "lines": [
+        {
+          "boundingBox": "1025,90,82,24",
+          "words": [
+            {
+              "boundingBox": "1025,90,82,24",
+              "text": "IDRH"
+            }
+          ]
+        },
+        {
+          "boundingBox": "1024,129,349,25",
+          "words": [
+            {
+              "boundingBox": "1024,129,277,25",
+              "text": "Non-text-searchable"
+            },
+            {
+              "boundingBox": "1311,130,62,23",
+              "text": "PDF"
+            }
+          ]
+        },
+        {
+          "boundingBox": "96,189,1078,32",
+          "words": [
+            {
+              "boundingBox": "96,189,61,25",
+              "text": "This"
+            },
+            {
+              "boundingBox": "167,189,22,25",
+              "text": "is"
+            },
+            {
+              "boundingBox": "199,197,32,17",
+              "text": "an"
+            },
+            {
+              "boundingBox": "240,189,114,32",
+              "text": "example"
+            },
+            {
+              "boundingBox": "365,189,32,25",
+              "text": "of"
+            },
+            {
+              "boundingBox": "402,197,15,17",
+              "text": "a"
+            },
+            {
+              "boundingBox": "426,189,269,25",
+              "text": "non-text-searchable"
+            },
+            {
+              "boundingBox": "706,190,69,24",
+              "text": "PDF."
+            },
+            {
+              "boundingBox": "786,190,114,24",
+              "text": "Because"
+            },
+            {
+              "boundingBox": "910,189,19,25",
+              "text": "it"
+            },
+            {
+              "boundingBox": "937,197,53,17",
+              "text": "was"
+            },
+            {
+              "boundingBox": "1000,189,99,25",
+              "text": "created"
+            },
+            {
+              "boundingBox": "1108,189,66,25",
+              "text": "from"
+            }
+          ]
+        },
+        {
+          "boundingBox": "70,228,1088,33",
+          "words": [
+            {
+              "boundingBox": "70,237,32,17",
+              "text": "an"
+            },
+            {
+              "boundingBox": "112,228,82,33",
+              "text": "image"
+            },
+            {
+              "boundingBox": "203,228,81,26",
+              "text": "rather"
+            },
+            {
+              "boundingBox": "292,228,60,26",
+              "text": "than"
+            },
+            {
+              "boundingBox": "361,237,15,17",
+              "text": "a"
+            },
+            {
+              "boundingBox": "384,232,52,22",
+              "text": "text"
+            },
+            {
+              "boundingBox": "446,228,142,31",
+              "text": "document,"
+            },
+            {
+              "boundingBox": "599,228,19,26",
+              "text": "it"
+            },
+            {
+              "boundingBox": "627,232,93,22",
+              "text": "cannot"
+            },
+            {
+              "boundingBox": "728,228,32,26",
+              "text": "be"
+            },
+            {
+              "boundingBox": "769,228,121,26",
+              "text": "rendered"
+            },
+            {
+              "boundingBox": "899,237,27,17",
+              "text": "as"
+            },
+            {
+              "boundingBox": "935,228,70,33",
+              "text": "plain"
+            },
+            {
+              "boundingBox": "1013,232,52,22",
+              "text": "text"
+            },
+            {
+              "boundingBox": "1074,228,34,33",
+              "text": "by"
+            },
+            {
+              "boundingBox": "1116,228,42,26",
+              "text": "the"
+            }
+          ]
+        },
+        {
+          "boundingBox": "69,268,1084,33",
+          "words": [
+            {
+              "boundingBox": "69,269,63,24",
+              "text": "PDF"
+            },
+            {
+              "boundingBox": "141,268,93,26",
+              "text": "reader."
+            },
+            {
+              "boundingBox": "245,268,76,31",
+              "text": "Thus,"
+            },
+            {
+              "boundingBox": "332,268,147,33",
+              "text": "attempting"
+            },
+            {
+              "boundingBox": "488,272,26,22",
+              "text": "to"
+            },
+            {
+              "boundingBox": "525,268,77,26",
+              "text": "select"
+            },
+            {
+              "boundingBox": "611,268,41,26",
+              "text": "the"
+            },
+            {
+              "boundingBox": "662,272,53,22",
+              "text": "text"
+            },
+            {
+              "boundingBox": "724,276,34,18",
+              "text": "on"
+            },
+            {
+              "boundingBox": "767,268,41,26",
+              "text": "the"
+            },
+            {
+              "boundingBox": "817,276,65,25",
+              "text": "page"
+            },
+            {
+              "boundingBox": "892,276,27,18",
+              "text": "as"
+            },
+            {
+              "boundingBox": "929,268,96,33",
+              "text": "though"
+            },
+            {
+              "boundingBox": "1035,268,18,26",
+              "text": "it"
+            },
+            {
+              "boundingBox": "1062,276,66,18",
+              "text": "were"
+            },
+            {
+              "boundingBox": "1138,276,15,18",
+              "text": "a"
+            }
+          ]
+        },
+        {
+          "boundingBox": "69,308,1110,32",
+          "words": [
+            {
+              "boundingBox": "69,312,52,21",
+              "text": "text"
+            },
+            {
+              "boundingBox": "131,308,135,25",
+              "text": "document"
+            },
+            {
+              "boundingBox": "275,316,29,17",
+              "text": "or"
+            },
+            {
+              "boundingBox": "312,308,105,25",
+              "text": "website"
+            },
+            {
+              "boundingBox": "427,308,52,25",
+              "text": "will"
+            },
+            {
+              "boundingBox": "488,312,45,21",
+              "text": "not"
+            },
+            {
+              "boundingBox": "541,308,78,31",
+              "text": "work,"
+            },
+            {
+              "boundingBox": "630,308,139,32",
+              "text": "regardless"
+            },
+            {
+              "boundingBox": "779,308,32,25",
+              "text": "of"
+            },
+            {
+              "boundingBox": "816,308,59,25",
+              "text": "how"
+            },
+            {
+              "boundingBox": "884,308,83,32",
+              "text": "neatly"
+            },
+            {
+              "boundingBox": "977,308,18,25",
+              "text": "it"
+            },
+            {
+              "boundingBox": "1005,308,21,25",
+              "text": "is"
+            },
+            {
+              "boundingBox": "1037,308,142,32",
+              "text": "organized."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
