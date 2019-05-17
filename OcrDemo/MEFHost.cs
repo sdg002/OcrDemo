@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace OcrDemo
 {
@@ -24,6 +25,9 @@ namespace OcrDemo
         //public Lazy<OcrDemo.Contracts.interfaces.IPluginOcrEngine, Dictionary<string, object>>[] OcrEngines { get; set; }
         public Lazy<OcrDemo.Contracts.interfaces.IPluginOcrEngine, Contracts.interfaces.IPluginMetaData>[] OcrEngines { get; set; }
 
+        [ImportMany]
+        public Lazy<ICommand, Dictionary<string, object>>[] CommandHandlers { get; set; }
+
         [Export]
         Microsoft.Extensions.Configuration.IConfiguration Config
         {
@@ -40,6 +44,11 @@ namespace OcrDemo
                 throw new NotImplementedException();
             }
         }
+        /// <summary>
+        /// Useful for passing context to command handlers
+        /// </summary>
+        [Export]
+        public Contracts.interfaces.IMainView MainView { get; set; }
     }
     public class OcrEngineMeta
     {

@@ -72,6 +72,7 @@
     <Compile Include="MEFHost.cs" />
     <Compile Include="MEFWrappers\AzureWrapper.cs" />
     <Compile Include="ScreenGrab\DataContext.cs" />
+    <Compile Include="ScreenGrab\FileOpenCommandHandler.cs" />
     <Compile Include="ScreenGrab\View.xaml.cs">
       <DependentUpon>View.xaml</DependentUpon>
     </Compile>

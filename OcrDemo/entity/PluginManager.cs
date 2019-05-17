@@ -22,6 +22,14 @@ namespace OcrDemo.entity
             }
         }
 
+        public Lazy<IPluginTabbedView, Dictionary<string, object>>[] TabbedViews
+        {
+            get
+            {
+                return _hostMef.TabbedViews;
+            }
+        }
+
         public IPluginOcrEngine GetInstance(IPluginMetaData mefmetdata)
         {
             if (mefmetdata.MefContractType == typeof(OcrDemo.Contracts.interfaces.IPluginOcrEngine))
@@ -35,5 +43,6 @@ namespace OcrDemo.entity
                 throw new NotImplementedException();
             }
         }
+
     }
 }

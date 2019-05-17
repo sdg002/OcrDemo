@@ -14,6 +14,7 @@ namespace OcrDemo.Contracts.interfaces
         /// This helps a Tabbed view dynamically pick an OCR engine
         /// </summary>
         interfaces.IPluginMetaData[] OcrEngines { get;  }
+
         /// <summary>
         /// Gets the plugin object with the specified metadata
         /// Why is this beneficial? This hides the underlying Lazy implementation by only exposing the IPluginMetaData to the consumers
@@ -21,5 +22,9 @@ namespace OcrDemo.Contracts.interfaces
         /// <param name="mefmetdata"></param>
         /// <returns></returns>
         IPluginOcrEngine GetInstance(IPluginMetaData mefmetdata);
+        /// <summary>
+        /// Gets a reference to all the Tabbed views that have got loaded through MEF
+        /// </summary>
+        Lazy<OcrDemo.Contracts.interfaces.IPluginTabbedView, Dictionary<string, object>>[] TabbedViews { get; }
     }
 }

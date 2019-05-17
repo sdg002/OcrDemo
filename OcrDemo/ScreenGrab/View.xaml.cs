@@ -46,6 +46,12 @@ namespace OcrDemo.ScreenGrab
             this.Loaded += View_Loaded;
         }
 
+        internal void LoadPicture(string fileName)
+        {
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(fileName);
+            ctlPicBox.Image = bmp;
+            ViewModel.ImageBytes = BytesFromImage();
+        }
         private void View_Loaded(object sender, RoutedEventArgs e)
         {
             

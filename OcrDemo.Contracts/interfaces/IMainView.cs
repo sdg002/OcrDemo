@@ -26,6 +26,12 @@ namespace OcrDemo.Contracts.interfaces
         /// <param name="text"></param>
         /// <returns></returns>
         string GetStatus(int panel, string text);
+        /// <summary>
+        /// This will make the specified tabbed plugin active
+        /// </summary>
+        /// <param name="tabpluginname">the unique name of the tab plugin</param>
+        void ActivateTab(string tabpluginname);
+
         ///// <summary>
         ///// Returns a list of all OCR engines that have been loaded. This helps a Tabbed view dynamically pick an OCR engine
         ///// </summary>

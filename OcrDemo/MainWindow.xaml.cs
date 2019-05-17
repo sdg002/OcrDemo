@@ -49,7 +49,7 @@ namespace OcrDemo
         private void InitMef()
         {
             _hostMef = new MEFHost();
-
+            _hostMef.MainView = this;
         }
 
         public bool IsBusy
@@ -144,7 +144,20 @@ namespace OcrDemo
                 */
             }
         }
-
+        public void ActivateTab(string tabpluginname)
+        {
+            OcrDemo.Controls.TabItemWrapper[] tabItems = ctlTabMain.
+                                                        Items.
+                                                        Cast<OcrDemo.Controls.TabItemWrapper>().ToArray();
+            OcrDemo.Controls.TabItemWrapper tabMatch = tabItems.
+                                                        FirstOrDefault(t => (string)t.Plugin.Metadata[OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGINNAME] == tabpluginname);
+            if (tabMatch == null)
+            {
+                MessageBox.Show($"No tab with plugin name:{tabpluginname} was found");
+                return;
+            }
+            ctlTabMain.SelectedItem=tabMatch;
+        }
         public void SetStatus(int panel, string text)
         {
             if (panel != 0) throw new ArgumentException($"The panel index should be 0");
@@ -159,6 +172,24 @@ namespace OcrDemo
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void MnuFile_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem mnuItem = e.OriginalSource as MenuItem;
+            string cmd = mnuItem.DataContext as string;
+            if (string.IsNullOrEmpty(cmd))
+            {
+                MessageBox.Show("The Menu item has not been tagged to any menu handler");
+                return;
+            }
+            var lazy = _hostMef.CommandHandlers.FirstOrDefault(lz => (string)lz.Metadata[OcrDemo.Contracts.Constants.MEF_ATTRIBUTE_PLUGINNAME] == cmd);
+            if (lazy == null)
+            {
+                MessageBox.Show($"No command handler found for the command:{cmd}");
+                return;
+            }
+            lazy.Value.Execute(null);
         }
     }
     /// <summary>
