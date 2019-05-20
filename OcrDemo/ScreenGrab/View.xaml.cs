@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -102,11 +103,14 @@ namespace OcrDemo.ScreenGrab
                 ViewModel.LastOcrResults = null;
                 Task t = new Task(this.ViewModel.DoOcr);
                 this.Main.IsBusy = true;
-                Main.SetStatus(0, "OCR is in progress");
+                Main.SetStatus(0, $"OCR is in progress, using engine='{ViewModel.SelectedOcrEngine.Description}'");
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 t.Start();
                 await t;
                 this.Main.IsBusy = false;
-                Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Results.Length} text objects");
+                sw.Stop();
+                Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Results.Length} text objects. Time={sw.ElapsedMilliseconds} ms");
             }
             catch (Exception ex)
             {
@@ -171,7 +175,7 @@ namespace OcrDemo.ScreenGrab
 
             }
             */
-            if (_tResults == null || _tResults.ThreadState != ThreadState.Running || _winOcrResults == null)
+            if (_tResults == null || _tResults.ThreadState != System.Threading.ThreadState.Running || _winOcrResults == null)
             {
                 _tResults = new Thread(new ThreadStart(this.LaunchResultsWindow));
                 _tResults.SetApartmentState(ApartmentState.STA);

@@ -70,6 +70,7 @@
     <Compile Include="entity\ConfigWrapperOverProperties.cs" />
     <Compile Include="entity\PluginManager.cs" />
     <Compile Include="MEFHost.cs" />
+    <Compile Include="MEFWrappers\AWsTextractWrapper.cs" />
     <Compile Include="MEFWrappers\AzureWrapper.cs" />
     <Compile Include="ScreenGrab\DataContext.cs" />
     <Compile Include="ScreenGrab\FileOpenCommandHandler.cs" />

@@ -70,5 +70,29 @@ namespace OcrDemo.Properties {
                 this["azure_accesskey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string awstextract_accesskey {
+            get {
+                return ((string)(this["awstextract_accesskey"]));
+            }
+            set {
+                this["awstextract_accesskey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string awstextract_secretkey {
+            get {
+                return ((string)(this["awstextract_secretkey"]));
+            }
+            set {
+                this["awstextract_secretkey"] = value;
+            }
+        }
     }
 }
