@@ -11,6 +11,7 @@ namespace UnitTestProject1
         /// <summary>
         /// This is more of an integration test. Helps in doing a quick end-end check of the AWS wrapper components
         /// You will need to set the Environment variables for AWS keys
+        /// Here we are testing AWS Rekognition
         /// </summary>
         [TestMethod]
         public void AwsRekognitionHelloWorld()
@@ -26,6 +27,9 @@ namespace UnitTestProject1
             Assert.IsTrue(txtIDRH.X1 > 1018 && txtIDRH.X2 < 1108);
             Assert.IsTrue(txtIDRH.Y1 > 80 && txtIDRH.Y2 < 115);
         }
+        /// <summary>
+        /// This is an integration test over AWS Textract service
+        /// </summary>
         [TestMethod]
         public void AwsTextTract()
         {
