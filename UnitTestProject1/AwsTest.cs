@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject1
@@ -24,6 +25,30 @@ namespace UnitTestProject1
             var txtIDRH = results.Results.First(t => t.Text.Contains("IDRH"));
             Assert.IsTrue(txtIDRH.X1 > 1018 && txtIDRH.X2 < 1108);
             Assert.IsTrue(txtIDRH.Y1 > 80 && txtIDRH.Y2 < 115);
+        }
+        [TestMethod]
+        public void AwsTextTract()
+        {
+            IConfiguration cfg = BuildConfig();
+            Aws.AwsTextTract ocr = new Aws.AwsTextTract();
+            ocr.AmazonAccessKey = cfg["awstextract_accesskey"];
+            ocr.AmazonSecretKey = cfg["awstextract_secretkey"];
+            ocr.Region = "eu-west-1";
+            string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\pics\\NonReadable.PNG");
+            byte[] raw = System.IO.File.ReadAllBytes(pathSample);
+            var results = ocr.Extract(raw);
+            Assert.AreEqual(62, results.Results.Length);
+            var txtIDRH = results.Results.First(t => t.Text.Contains("IDRH"));
+            Assert.IsTrue(txtIDRH.X1 > 1018 && txtIDRH.X2 < 1111);
+            Assert.IsTrue(txtIDRH.Y1 > 85 && txtIDRH.Y2 < 117);
+
+        }
+
+        private IConfigurationRoot BuildConfig()
+        {
+            var configbuilder = new ConfigurationBuilder();
+            configbuilder.AddUserSecrets("78810728-6df2-4953-aa98-b77a6a77b66e");
+            return configbuilder.Build();
         }
     }
 }

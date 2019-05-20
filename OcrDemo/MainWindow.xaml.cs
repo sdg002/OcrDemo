@@ -216,14 +216,14 @@ namespace OcrDemo
         }
     }
 }
-//TODO Azure Computer Vision . 1)Write a plugin using sample code at , use HTTP post
-//2)https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts/csharp-print-text
+//
+//TODO Most recent files - add a collection to Root, bind UI menu items to collection, write to this collection from handler, Save information
+//TODO When displaying rendered objects, Save JSON with name of original file
 //TODO Scroll bar on pasted Image window
 //TODO Scroll bar on Results window
 //TODO Enable OCR button only when engine is selected (look for Converters nuget package)
 //TODO Show some progress - a modal dialog with spinner OR a thin progress indicator in the toolbar
 //TODO Try Windows 7 theme from Extended toolkit
-//TODO Investigate if it is possible to handle and event when MEF Lazy object is initialized (Try using a Func delegate , how to tie it up to an instance?)
 //TODO AWS-Investigate why are coordinates negative , use 2 lines near the upper border
 
 
