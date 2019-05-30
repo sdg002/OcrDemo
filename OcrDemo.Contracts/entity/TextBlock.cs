@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OcrDemo.Contracts.entity
 {
-    public class TextResult
+    public class TextBlock
     {
         /// <summary>
         /// The text that was detected

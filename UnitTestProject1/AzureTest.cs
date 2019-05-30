@@ -16,8 +16,8 @@ namespace UnitTestProject1
             string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\pics\\NonReadable.PNG");
             byte[] raw = System.IO.File.ReadAllBytes(pathSample);
             var rsOuter = engine.Extract(raw);
-            Assert.AreEqual(62, rsOuter.Results.Length);
-            var txtIDRH = rsOuter.Results.First(t => t.Text.Contains("IDRH"));
+            Assert.AreEqual(62, rsOuter.Blocks.Length);
+            var txtIDRH = rsOuter.Blocks.First(t => t.Text.Contains("IDRH"));
             Assert.IsTrue(txtIDRH.X1 > 1020 && txtIDRH.X2 < 1108);
             Assert.IsTrue(txtIDRH.Y1 > 85 && txtIDRH.Y2 < 115);
         }
@@ -28,10 +28,13 @@ namespace UnitTestProject1
             string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\Azure\\SampleResponse.json");
             string json = System.IO.File.ReadAllText(pathSample);
             var rsOuter = engine.ExtractEntitiesFromJson(json);
-            Assert.AreEqual(62, rsOuter.Results.Length);
-            var txtIDRH = rsOuter.Results.First(t => t.Text.Contains("IDRH"));
+            Assert.AreEqual(62, rsOuter.Blocks.Length);
+            var txtIDRH = rsOuter.Blocks.First(t => t.Text.Contains("IDRH"));
             Assert.IsTrue(txtIDRH.X1 > 1020 && txtIDRH.X2 < 1108);
             Assert.IsTrue(txtIDRH.Y1 > 85 && txtIDRH.Y2 < 115);
+            Assert.AreEqual(6,rsOuter.Sentences.Length);
+            Assert.IsTrue(rsOuter.Sentences[0].ToString().Contains("IDRH"));
+            Assert.IsTrue(rsOuter.Sentences[5].ToString().Contains("regardless"));
 
         }
     }

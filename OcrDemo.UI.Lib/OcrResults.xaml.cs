@@ -62,11 +62,11 @@ namespace OcrDemo.UI.Lib
             Contracts.entity.TextExtractionResults ocr = null;
             if (lastOcrResults == null)
             {
-                ctlStatusPanel0.Text = $"Found {lastOcrResults.Results.Length} text objects";
+                ctlStatusPanel0.Text = $"Found {lastOcrResults.Blocks.Length} text objects";
                 //Create an empty object if none was specified
                 ocr = new Contracts.entity.TextExtractionResults
                 {
-                    Results = new Contracts.entity.TextResult[]
+                    Blocks = new Contracts.entity.TextBlock[]
                     {
                     }
                 };
@@ -84,7 +84,7 @@ namespace OcrDemo.UI.Lib
                 _picBox.Image = imge;
                 using (var g = System.Drawing.Graphics.FromImage(imge))
                 {
-                    foreach (var box in ocr.Results)
+                    foreach (var box in ocr.Blocks)
                     {
                         //var pts = new System.Drawing.Point[]
                         //{

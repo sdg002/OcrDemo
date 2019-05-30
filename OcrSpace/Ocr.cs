@@ -36,10 +36,10 @@ namespace OcrSpace
                                 SelectMany(r => r.TextOverlay.Lines).
                                 SelectMany(ln => ln.Words).
                                 ToArray();
-            List<TextResult> lstTextWords = new List<TextResult>();
+            List<TextBlock> lstTextWords = new List<TextBlock>();
             foreach(var word in allWords)
             {
-                TextResult rsTxt = new TextResult
+                TextBlock rsTxt = new TextBlock
                 {
                     Text = word.WordText,                    
                     X1=word.Left,
@@ -49,7 +49,7 @@ namespace OcrSpace
                 rsTxt.Y2 = word.Top + word.Height;
                 lstTextWords.Add(rsTxt);
             }
-            rs.Results = lstTextWords.ToArray();
+            rs.Blocks = lstTextWords.ToArray();
             return rs;
         }
 

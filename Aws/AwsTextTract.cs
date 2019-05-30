@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using OcrDemo.Contracts.entity;
+using System.Linq;
 
 namespace Aws
 {
@@ -42,11 +43,11 @@ namespace Aws
                 result = client.DetectDocumentTextAsync(request).Result;
             }
             TextExtractionResults rs = new TextExtractionResults();
-            List<TextResult> lstTextBoxes = new List<TextResult>();
+            List<TextBlock> lstTextBoxes = new List<TextBlock>();
             DetermineDimensions(image);
             foreach(var block in result.Blocks)
             {
-                TextResult rsText = new TextResult();
+                TextBlock rsText = new TextBlock();
                 rsText.Text = block.Text;
                 if (string.IsNullOrWhiteSpace(rsText.Text)) continue;//The first element is always NULL, so it appears
                 if (block.BlockType == Amazon.Textract.BlockType.WORD)
@@ -61,8 +62,12 @@ namespace Aws
                     rsText.Y2 = rsText.Y1 + height;
                     lstTextBoxes.Add(rsText);
                 }
+                else
+                {
+                    //Para or line perhaps?
+                }
             }
-            rs.Results = lstTextBoxes.ToArray();
+            rs.Blocks = lstTextBoxes.ToArray();
             return rs;
         }
 

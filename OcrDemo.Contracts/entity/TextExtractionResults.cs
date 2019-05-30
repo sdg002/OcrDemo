@@ -9,9 +9,17 @@ namespace OcrDemo.Contracts.entity
     /// </summary>
     public class TextExtractionResults
     {
+        public TextExtractionResults()
+        {
+            Blocks = new TextBlock[] { };
+            Paragraphs = new Paragraph[] { };
+            Sentences = new Sentence[] { };
+        }
         /// <summary>
         /// Individual text elements recognized by the OCR engine along with their bounding boxes
         /// </summary>
-        public TextResult[] Results { get; set; }
+        public TextBlock[] Blocks { get; set; }
+        public Paragraph[] Paragraphs { get; set; }
+        public Sentence[] Sentences { get; set; }
     }
 }

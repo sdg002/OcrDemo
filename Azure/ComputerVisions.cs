@@ -57,19 +57,54 @@ namespace Azure
 
         public TextExtractionResults ExtractEntitiesFromJson(string jsonText)
         {
-            JObject json = JObject.Parse(jsonText);
-            IEnumerable<JToken> words = json.SelectTokens("$..words");
-            JToken[] arr = words.ToArray();
-            JToken[] arrAllChildren = arr.SelectMany(t => t).ToArray();
+
+            //TextExtractionResults rs = new TextExtractionResults();
+            //JObject json = JObject.Parse(jsonText);
+            //IEnumerable<JToken> words = json.SelectTokens("$..words");
+            //JToken[] arr = words.ToArray();
+            //JToken[] arrAllChildren = arr.SelectMany(t => t).ToArray();
+            //rs.Blocks = arrAllChildren.
+            //                    Select(r => CreateFromJtoken(r)).
+            //                    ToArray();
+
             TextExtractionResults rs = new TextExtractionResults();
-            rs.Results = arrAllChildren.
-                                Select(r => CreateFromJtoken(r)).
+            JObject json = JObject.Parse(jsonText);
+            ///
+            /// Use the sentences approach - May ,2019
+            ///
+            IEnumerable<JToken> lines = json.
+                            SelectTokens("$..lines").
+                            SelectMany(l=>l).ToArray();
+            List<TextBlock> lstAllBlocks = new List<TextBlock>();
+            List<Sentence> lstAllSentences = new List<Sentence>();
+            foreach(JToken line in lines)
+            {
+                string boxCoordinates= line["boundingBox"].Value<string>();
+                float[] dblCoordinates =
+                                boxCoordinates.Split(',').
+                                Select(frag => float.Parse(frag)).
                                 ToArray();
+                Sentence sentNew = new Sentence();
+                sentNew.Rectangle = new System.Drawing.RectangleF(
+                                                dblCoordinates[0], dblCoordinates[1], 
+                                                dblCoordinates[2], dblCoordinates[3]);
+                JToken[] arrAllWords = line.
+                                        SelectTokens("$..words").
+                                        SelectMany(t=>t).ToArray();
+                TextBlock[] blockFromWords = arrAllWords.
+                            Select(r => CreateFromJtoken(r)).
+                            ToArray();
+                sentNew.Blocks = blockFromWords;
+                lstAllSentences.Add(sentNew);
+                lstAllBlocks.AddRange(blockFromWords);
+            }
+            rs.Sentences = lstAllSentences.ToArray();
+            rs.Blocks = lstAllBlocks.ToArray();
             return rs;
         }
-        TextResult CreateFromJtoken(JToken token)
+        TextBlock CreateFromJtoken(JToken token)
         {
-            TextResult r = new TextResult();
+            TextBlock r = new TextBlock();
             r.Text = token["text"].Value<string>();
             string coordinates = token["boundingBox"].Value<string>();
             double[] dblCoordinates = 

@@ -68,15 +68,15 @@ namespace OcrDemo.DebugView
             OcrDemo.UI.Lib.OcrResults win = new UI.Lib.OcrResults();
             Contracts.entity.TextExtractionResults lastOcrResults = new Contracts.entity.TextExtractionResults
             {
-                Results = new Contracts.entity.TextResult[]
+                Blocks = new Contracts.entity.TextBlock[]
                 {
-                    new Contracts.entity.TextResult
+                    new Contracts.entity.TextBlock
                     {
                         Text="hello",
                         X1=100, X2=150,
                         Y1=100, Y2=150
                     },
-                    new Contracts.entity.TextResult
+                    new Contracts.entity.TextBlock
                     {
                         Text="hello 2",
                         X1=200, X2=250,

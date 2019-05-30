@@ -20,7 +20,7 @@ namespace Aws
         public TextExtractionResults Extract(byte[] image)
         {
             TextExtractionResults rs = new TextExtractionResults();
-            List<TextResult> rsTextBoxes = new List<TextResult>();
+            List<TextBlock> rsTextBoxes = new List<TextBlock>();
             AmazonRekognitionClient rekognitionClient = CreateAwsClient();
             using (var stm = new System.IO.MemoryStream(image))
             {
@@ -41,7 +41,7 @@ namespace Aws
                 {
                     string text = textResult.DetectedText;
                     Amazon.Rekognition.Model.Geometry oGeom = textResult.Geometry;
-                    TextResult rsText = new TextResult();
+                    TextBlock rsText = new TextBlock();
                     rsText.Text = text;
                     rsText.X1 = oGeom.BoundingBox.Left * imgWidth;
                     rsText.X2 = rsText.X1+oGeom.BoundingBox.Width * imgWidth;
@@ -50,7 +50,7 @@ namespace Aws
                     rsTextBoxes.Add(rsText);
                 }
             }
-            rs.Results = rsTextBoxes.ToArray();
+            rs.Blocks = rsTextBoxes.ToArray();
             return rs;
         }
 

@@ -218,7 +218,7 @@ namespace OcrDemo
 }
 //
 //TODO Most recent files - add a collection to Root, bind UI menu items to collection, write to this collection from handler, Save information
-//TODO When displaying rendered objects, Save JSON with name of original file
+//TODO When displaying rendered objects, Save JSON with name of original file, save the name of the OCR engine, time taken. Helps in diagnostics
 //TODO Scroll bar on pasted Image window
 //TODO Scroll bar on Results window
 //TODO Enable OCR button only when engine is selected (look for Converters nuget package)
