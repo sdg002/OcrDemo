@@ -17,5 +17,10 @@ namespace OcrDemo.Contracts.entity
         /// The geometric bounds of the paragraph
         /// </summary>
         public System.Drawing.RectangleF Rectangle { get; set; }
+        public override string ToString()
+        {
+            if (this.Sentences == null) this.Sentences = new Sentence[] { };
+            return $"Rect={this.Rectangle}    Sentences={this.Sentences.Length} ";
+        }
     }
 }

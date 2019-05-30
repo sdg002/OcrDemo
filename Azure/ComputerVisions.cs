@@ -69,6 +69,25 @@ namespace Azure
 
             TextExtractionResults rs = new TextExtractionResults();
             JObject json = JObject.Parse(jsonText);
+            List<Paragraph> lstParas = new List<Paragraph>();
+            IEnumerable<JToken> sections = json.
+                            SelectTokens("$..regions").
+                            SelectMany(l => l).ToArray();
+            foreach(JToken tSection in sections)
+            {
+                string boxCoordinates = tSection["boundingBox"].Value<string>();
+                float[] dblCoordinates =
+                                boxCoordinates.Split(',').
+                                Select(frag => float.Parse(frag)).
+                                ToArray();
+                Paragraph paraNew = new Paragraph();
+                var rect = new System.Drawing.RectangleF(
+                                                dblCoordinates[0], dblCoordinates[1],
+                                                dblCoordinates[2], dblCoordinates[3]);
+                paraNew.Rectangle = rect;
+                lstParas.Add(paraNew);
+            }
+            rs.Paragraphs = lstParas.ToArray();
             ///
             /// Use the sentences approach - May ,2019
             ///

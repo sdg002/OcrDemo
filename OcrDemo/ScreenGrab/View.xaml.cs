@@ -110,7 +110,7 @@ namespace OcrDemo.ScreenGrab
                 await t;
                 this.Main.IsBusy = false;
                 sw.Stop();
-                Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Blocks.Length} text objects.Sentences={ViewModel.LastOcrResults.Sentences.Length}  Time={sw.ElapsedMilliseconds} ms");
+                Main.SetStatus(0, $"Long operation is complete. Found {ViewModel.LastOcrResults.Blocks.Length} text objects.Sentences={ViewModel.LastOcrResults.Sentences.Length}, Paragraphs={ViewModel.LastOcrResults.Paragraphs.Length}  Time={sw.ElapsedMilliseconds} ms");
             }
             catch (Exception ex)
             {

@@ -75,7 +75,9 @@ namespace OcrDemo.UI.Lib
             {
                 ocr = lastOcrResults;
             }
-            System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Black);
+            System.Drawing.Pen penBlock = new System.Drawing.Pen(System.Drawing.Color.Black);
+            System.Drawing.Pen penSentence = new System.Drawing.Pen(System.Drawing.Color.Orange, 3);
+            System.Drawing.Pen penPara = new System.Drawing.Pen(System.Drawing.Color.Blue,3);
             System.Drawing.Brush b = new System.Drawing.SolidBrush(
                             System.Drawing.Color.FromArgb(100, System.Drawing.Color.Yellow));
             using (var memStm = new System.IO.MemoryStream(raw))
@@ -99,8 +101,22 @@ namespace OcrDemo.UI.Lib
                         int yUpperLeft = (int)Math.Min(box.Y1, box.Y2);
                         float width = (float)Math.Abs(box.X1 - box.X2);
                         float ht = (float)Math.Abs(box.Y1 - box.Y2);
-                        g.DrawRectangle(pen, xUpperLeft, yUpperLeft, width, ht);
+                        g.DrawRectangle(penBlock, xUpperLeft, yUpperLeft, width, ht);
                         g.FillRectangle(b, xUpperLeft, yUpperLeft, width, ht);
+                    }
+                    foreach(var sentence in ocr.Sentences)
+                    {
+                        g.DrawLine(
+                                penSentence, 
+                                sentence.Rectangle.X, sentence.Rectangle.Bottom, 
+                                sentence.Rectangle.Right, sentence.Rectangle.Bottom);
+                    }
+                    foreach (var para in ocr.Paragraphs)
+                    {
+                        g.DrawRectangle(
+                                penPara, 
+                                para.Rectangle.Left, para.Rectangle.Top, 
+                                para.Rectangle.Width, para.Rectangle.Height);
                     }
                 }
             }

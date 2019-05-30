@@ -35,6 +35,7 @@ namespace UnitTestProject1
             Assert.AreEqual(6,rsOuter.Sentences.Length);
             Assert.IsTrue(rsOuter.Sentences[0].ToString().Contains("IDRH"));
             Assert.IsTrue(rsOuter.Sentences[5].ToString().Contains("regardless"));
+            Assert.AreEqual(1,rsOuter.Paragraphs.Length);
 
         }
     }

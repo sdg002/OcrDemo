@@ -21,5 +21,12 @@ namespace OcrDemo.Contracts.entity
         public TextBlock[] Blocks { get; set; }
         public Paragraph[] Paragraphs { get; set; }
         public Sentence[] Sentences { get; set; }
+        public override string ToString()
+        {
+            if (this.Blocks == null) this.Blocks = new TextBlock[] { };
+            if (this.Sentences == null) this.Sentences = new Sentence[] { };
+            if (this.Paragraphs == null) this.Paragraphs = new Paragraph[] { };
+            return $"Blocks={Blocks.Length} Sentences={Sentences.Length}    Paragraphs={Paragraphs.Length}";
+        }
     }
 }
