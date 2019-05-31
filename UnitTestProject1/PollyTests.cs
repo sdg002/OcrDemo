@@ -74,5 +74,34 @@ namespace UnitTestProject1
             Trace.Unindent();
             Trace.TraceInformation("All done");
         }
+        /// <summary>
+        /// Here we are experimenting with how to deal with the exit code from a process
+        /// </summary>
+        [TestMethod]
+        public void RetryUsingReturnValueFromFucntion()
+        {
+            Func<int,int> fnLaunchProcess = delegate (int maxretries)
+            {
+                Trace.WriteLine($"{nameof(fnLaunchProcess)}, Current attempts={AttemptCounter} Max attempts={maxretries}");
+                this.AttemptCounter++;
+                if (this.AttemptCounter > maxretries)
+                {
+                    Trace.WriteLine($"{nameof(fnLaunchProcess)}    Success finally!!");
+                    return 0;
+                }
+                else
+                {
+                    Trace.WriteLine($"{nameof(fnLaunchProcess)}    going to return non-zero exit code");
+                    return -1;
+                }
+            };
+            TimeSpan spDelay = TimeSpan.FromMilliseconds(1000);
+            var policyBuilder = Policy.HandleResult<int>(exitcode => exitcode != 0);
+            Trace.TraceInformation("Begin attempts");
+            var policy = policyBuilder.WaitAndRetry(new TimeSpan[] { spDelay, spDelay, spDelay });
+            policy.Execute(() => fnLaunchProcess(5));
+            Trace.TraceInformation("All done");
+
+        }
     }
 }

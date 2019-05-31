@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="Data\pics\NonReadable.PNG" />
     <Content Include="Data\pics\Phytopharm.PNG" />
+    <Content Include="Data\pics\Readme.txt" />
     <Content Include="Data\pics\TDGlobal.PNG" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

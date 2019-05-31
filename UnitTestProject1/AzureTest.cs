@@ -8,7 +8,7 @@ namespace UnitTestProject1
     public class AzureTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Live_HappyPath()
         {
             Azure.ComputerVisions engine = new Azure.ComputerVisions();
             engine.Url = "https://uksouth.api.cognitive.microsoft.com/";
@@ -20,6 +20,29 @@ namespace UnitTestProject1
             var txtIDRH = rsOuter.Blocks.First(t => t.Text.Contains("IDRH"));
             Assert.IsTrue(txtIDRH.X1 > 1020 && txtIDRH.X2 < 1108);
             Assert.IsTrue(txtIDRH.Y1 > 85 && txtIDRH.Y2 < 115);
+        }
+        [TestMethod]
+        public void Live_InvalidAppKey()
+        {
+            Azure.ComputerVisions engine = new Azure.ComputerVisions();
+            engine.Url = "https://uksouth.api.cognitive.microsoft.com/";
+            engine.AppKey = "some invalid key";
+            string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\pics\\NonReadable.PNG");
+            byte[] raw = System.IO.File.ReadAllBytes(pathSample);
+            var rsOuter = engine.Extract(raw);
+            //We will not receive an Exception. Azure will return a custom JSON with the error desscription
+        }
+        [TestMethod]
+        public void Live_InvalidPicture()
+        {
+            Azure.ComputerVisions engine = new Azure.ComputerVisions();
+            engine.Url = "https://uksouth.api.cognitive.microsoft.com/";
+            engine.AppKey = Environment.GetEnvironmentVariable("azureocr_key");
+            //We are passing the contents of the TXT file
+            string pathInvalidPictureFile = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\pics\\Readme.txt");
+            byte[] raw = System.IO.File.ReadAllBytes(pathInvalidPictureFile);
+            var rsOuter = engine.Extract(raw);
+            //We will not receive an Exception. Azure will return a custom JSON with the error desscription
         }
         [TestMethod]
         public void ProcessJson()
