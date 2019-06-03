@@ -38,6 +38,18 @@ namespace UnitTestProject1
             Assert.AreEqual(1, counter);
 
         }
+        [TestMethod]
+        public void MethodNotMocked_ShouldBeCalledOnOriginalObject()
+        {
+            Moq.Mock<Demo> mockDemo = new Moq.Mock<Demo>();
+            int counter = 0;
+            mockDemo.Setup(m => m.DoSomeWork2()).Callback(() => counter++);
+            var obj = mockDemo.Object;
+            obj.DoSomeWork();
+            obj.DoSomeWork2();
+            Assert.AreEqual(1, counter);
+
+        }
         /// <summary>
         /// This is an example which demonstrates the limitation of the Moq framework
         /// We are unable to mock the read only property Id of the Process class because this is not overridable

@@ -18,7 +18,24 @@ namespace Azure
         public string Url { get; set; }
         public string AppKey { get; set; }
 
+        /// <summary>
+        /// Making this method virtual so that it can be mocked
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         public TextExtractionResults Extract(byte[] image)
+        {
+            string json = GetJsonFromAzure(image);
+            OcrDemo.Contracts.entity.TextExtractionResults rs = ExtractEntitiesFromJson(json);
+            return rs;
+        }
+        /// <summary>
+        /// This is the one and only method which goes out to the internet
+        /// Markthing method virtual so that it can be mocked for better testability
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public virtual string GetJsonFromAzure(byte[] image)
         {
             var client = new HttpClient();
             var queryString = HttpUtility.ParseQueryString(string.Empty);
@@ -50,11 +67,8 @@ namespace Azure
                 HttpContent ct = response.Content;
                 json = ct.ReadAsStringAsync().Result;
             }
-
-            OcrDemo.Contracts.entity.TextExtractionResults rs = ExtractEntitiesFromJson(json);
-            return rs;
+            return json;
         }
-
         public TextExtractionResults ExtractEntitiesFromJson(string jsonText)
         {
 
