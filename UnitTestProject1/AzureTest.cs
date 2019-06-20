@@ -118,5 +118,38 @@ namespace UnitTestProject1
             Assert.AreEqual(1, resultsFromOcr.Paragraphs.Length);
 
         }
+        /// <summary>
+        /// Here we are mocking using It.Any
+        /// </summary>
+        [TestMethod]
+        public void Mocked_HappyPath_2()
+        {
+            Azure.ComputerVisions engine = null;
+            byte[] inputpicture = new byte[] { 0, 1, 1, 0 };
+            string pathSample = System.IO.Path.Combine(util.Util.GetProjectDir(), "Data\\Azure\\SampleResponse.json");
+            string jsonFake = System.IO.File.ReadAllText(pathSample);
+            string appKey = Guid.NewGuid().ToString();
+            string url = Guid.NewGuid().ToString();
+            Mock<Azure.ComputerVisions> mocked = new Mock<Azure.ComputerVisions>();
+            Func<byte[], string> fnGetJsonFromAzure = delegate (byte[] image)
+            {
+                //Verify that the function has received the picture byte that was intended
+                CollectionAssert.AreEqual(inputpicture, image);
+                //We are bypassing the live call to Azure by using fake json
+                return jsonFake;
+            };
+            mocked.Setup(e => e.GetJsonFromAzure(It.IsAny<byte[]>())).Returns<byte[]>(fnGetJsonFromAzure);
+            engine = mocked.Object;
+            engine.Url = url;
+            engine.AppKey = appKey;
+            var resultsFromOcr = engine.Extract(inputpicture);
+            var txtIDRH = resultsFromOcr.Blocks.First(t => t.Text.Contains("IDRH"));
+            Assert.IsTrue(txtIDRH.X1 > 1020 && txtIDRH.X2 < 1108);
+            Assert.IsTrue(txtIDRH.Y1 > 85 && txtIDRH.Y2 < 115);
+            Assert.AreEqual(6, resultsFromOcr.Sentences.Length);
+            Assert.IsTrue(resultsFromOcr.Sentences[0].ToString().Contains("IDRH"));
+            Assert.IsTrue(resultsFromOcr.Sentences[5].ToString().Contains("regardless"));
+            Assert.AreEqual(1, resultsFromOcr.Paragraphs.Length);
+        }
     }
 }

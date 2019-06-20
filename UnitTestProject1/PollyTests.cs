@@ -103,5 +103,27 @@ namespace UnitTestProject1
             Trace.TraceInformation("All done");
 
         }
+        [TestMethod]
+        public void RetryUsingReturnValue_DelayDependsOnReturnValue()
+        {
+            //Cannot get this to work
+            //We want to have a policy on return value
+            //We want to delay depending on return value
+
+            //int mockedResponse = 0;
+            //Func<int> fnHttpRequest=delegate()
+            //{
+            //    return mockedResponse;
+            //};
+            //Action<int,int> fnRetry=delegate(int result,int retryattempt)
+            //{
+
+            //};
+            //{
+            //    var policyBuilder = Policy.HandleResult<int>(code => code != 0);
+            //    var policy = policyBuilder.Retry(3, new Action<DelegateResult<int>, int>(fnRetry));
+            //}
+            throw new NotImplementedException();
+        }
     }
 }
